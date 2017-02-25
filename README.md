@@ -1,7 +1,11 @@
 # Library: `try` ... `catch` signal handling
 Convert OS-level signals (or CPU exceptions) into catchable C++ software exceptions
 
+**:dart: Beta stage:** This library is almost untested. Try it hard, fix it, tell me your experiments!
+
 ## Introduction:
+This is my first library in C++. As a beginner I would like to meet other C++ developers and fix bugs.
+
 By default, exceptions coming from CPU are not catch-able. This includes *memory access violation* (`SIGSEGV`), *illegal mathematical operation* (`SIGFPE`) and *illegal instruction* (`SIGILL`). They are signaled by the operating system and are asynchronous. When they happen, your program crashes.
 
 The C++ language provides the function `std::signal()` which allows to change the behavior when such signals are triggered. By using it, you can customize what happens. You can choose between **calling a handling function** (similar to interrupt), **ignoring the signal** (worthless if the signal is a CPU exception) or **going back to the default behavior** (simple crash). If you choose to call a function but do nothing special with it, the program will crash.

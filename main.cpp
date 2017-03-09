@@ -4,7 +4,7 @@
 #define MESSAGE_EXCEPTION( what, file, line ) std::cerr << "Program survived a " << what << " in " << file << ':' << line << std::endl
 
 int main(/*int argc, char *argv[]*/){
-	CATCH_SIGNALS_CPU();
+	TryCatchSignalHandler::catchSignalsCpu();
 	
 	std::cout << "SIGSEGV = " << SIGSEGV << std::endl;
 	std::cout << "SIGILL = " << SIGILL << std::endl;

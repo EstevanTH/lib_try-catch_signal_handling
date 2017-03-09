@@ -21,11 +21,11 @@ With this library, you can make safer multithreaded applications (safely closing
 ```
 #### 2- Add this line at the top of the `main()` function in `main.cpp`
 ```cpp
-CATCH_SIGNALS_CPU();
+TryCatchSignalHandler::catchSignalsCpu();
 ```
 If you want to protect your program for all default signals instead of just CPU exceptions, use instead
 ```cpp
-CATCH_SIGNALS_ALL();
+TryCatchSignalHandler::catchSignalsAll();
 ```
 #### 3- Every time you want to protect a piece of code, replace your usual
 ```cpp
@@ -48,7 +48,7 @@ catch( std::exception& e ){
 }
 FINISH_TRY( identifier );
 ```
-where `identifier` can contain digits, letters and underscores. The `identifier` must be unique in a function.
+where `identifier` can contain digits, letters and underscores. The `identifier` must be unique in a function, as enforced by the C++ parser.
 
 ## Compatibility:
 - I tested my library successfully with **MinGW 5.3**.
@@ -59,8 +59,8 @@ I could not test real `SIGILL` signals because they require to assembly-edit the
 
 ## Warnings:
 - As a beginner in C++, I cannot say if this code is reliable, but I wish to help any of you.
-- Execution continues exactly where it stopped (possibly in external libraries or so). This can lead to memory leaks and unpredictable behavior!
-- Objects & data manually instantiated in the `TRY` sequence (using `new`) must be freed even when an exception / a signal happened before the matching `delete` within that sequence.
+- Execution continues in the catch block after being interrupted by an exception (possibly in external libraries or so). This is different than usual *try/catch* because exceptions are not thrown by C++ mechanism: this can lead to memory leaks and unpredictable behavior!
+- *Reminder:* Usage of the usual *catch/try* syntax requires you to be aware that objects & data manually instantiated in the `TRY` sequence (using `new`) must be freed even when an exception / a signal happened before the matching `delete` within that sequence.
 
 ## Notes:
 - Simulated signals (eg. triggered with `std::raise()`) do not require a jump in order to continue. On the contrary when real signals happen, the instruction pointer seems to retry the same instruction forever if the signal is ignored.

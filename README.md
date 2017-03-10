@@ -10,7 +10,7 @@ By default, exceptions coming from CPU are not catch-able. This includes *memory
 
 The C++ language provides the function `std::signal()` which allows to change the behavior when such signals are triggered. By using it, you can customize what happens. You can choose between **calling a handling function** (similar to interrupt), **ignoring the signal** (worthless if the signal is a CPU exception) or **going back to the default behavior** (simple crash). If you choose to call a function but do nothing special with it, the program will crash.
 
-*Well, I combined all of this to make a small library with a lightweight syntax, based on the well-known `try`-`catch` structure.*
+*Well, I combined all of this to make a small library with a lightweight syntax, based on the well-known `try`/`catch` structure.*
 
 With this library, you can make safer multithreaded applications (safely closing the thread instead of crashing application). You can save some data before closing (and avoid lost work). You can even continue the execution if you really know what you are doing!
 
@@ -60,7 +60,7 @@ I could not test real `SIGILL` signals because they require to assembly-edit the
 ## Warnings:
 - As a beginner in C++, I cannot say if this code is reliable, but I wish to help any of you.
 - Execution continues in the catch block after being interrupted by an exception (possibly in external libraries or so). This is different than usual *try/catch* because exceptions are not thrown by C++ mechanism: this can lead to memory leaks and unpredictable behavior!
-- *Reminder:* Usage of the usual *catch/try* syntax requires you to be aware that objects & data manually instantiated in the `TRY` sequence (using `new`) must be freed even when an exception / a signal happened before the matching `delete` within that sequence.
+- *Reminder:* Usage of the usual *try/catch* syntax requires you to be aware that objects & data manually instantiated in the `TRY` sequence (using `new`) must be freed even when an exception / a signal happened before the matching `delete` within that sequence.
 
 ## Notes:
 - Simulated signals (eg. triggered with `std::raise()`) do not require a jump in order to continue. On the contrary when real signals happen, the instruction pointer seems to retry the same instruction forever if the signal is ignored.

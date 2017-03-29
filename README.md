@@ -14,6 +14,8 @@ The C++ language provides the function `std::signal()` which allows to change th
 
 With this library, you can make safer multithreaded applications (safely closing the thread instead of crashing application). You can save some data before closing (and avoid lost work). You can even continue the execution if you really know what you are doing!
 
+The license has been replaced with the *BSD license* in order to make the library available for all usages. This still allows you to use the previously used *GNU GPL v3.0*.
+
 ## Usage:
 #### 1- Include the header of the library:
 ```cpp

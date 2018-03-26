@@ -1,4 +1,4 @@
-#include "TryCatchSignalHandler.h"
+#include "TryCatchSignalHandler2.h"
 
 // #define TRYCATCHSIGNALHANDLER_DEBUG 1
 #define NO_SIGNAL_VALUE 0

@@ -56,9 +56,7 @@ FINISH_TRY();
 ## Compatibility:
 - I tested my library successfully with **MinGW 5.3**.
 - **GCC** compilers will probably work because **MinGW** does.
-- I tried **MSVC2013 (Visual C++ 12.0)**. `SIGSEGV` signals seem to be handled properly while `SIGFPE` signals crash the program without calling the handling function.
-
-I could not test real `SIGILL` signals because they require to assembly-edit the binary program to replace an instruction with a non-existing one.
+- I tried **MSVC2013 (Visual C++ 12.0)**. `SIGSEGV` & `SIGILL` signals seem to be handled properly while `SIGFPE` signals crash the program without calling the handling function.
 
 ## Warnings:
 - As a beginner in C++, I cannot say if this code is reliable, but I wish to help any of you.
